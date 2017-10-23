@@ -15,17 +15,17 @@ int main ()
 	primtall.push_back(3);
 	for (int i=2; i<10000; i++)
 	{
-        for (int j=2; j*j<=i; j++)
-        {
-            if (i % j == 0) 
+		for (int j=2; j*j<=i; j++)
+		{
+			if (i % j == 0) 
 			{
-                break;
+				break;
 			}
-            else if (j+1 > sqrt(i)) 
+			else if (j+1 > sqrt(i)) 
 			{
-                primtall.push_back(i); // putter primtall i vector
-            }
-        } 
+				primtall.push_back(i); // putter primtall i vector
+			}
+		} 
 	}
 	
 	// faktorerer tallet i start ved å iterere vector primtall
