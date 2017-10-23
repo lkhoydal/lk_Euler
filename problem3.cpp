@@ -9,9 +9,9 @@ int main ()
 	vector<int> primtall;
 	vector<int> faktorer;
 	unsigned long start = 600851475143;
-	unsigned long tallet = 600851475143;
+	unsigned long tallet = start;
 	
-	// Legger primtall i vector
+	// Legger primtall under 10 000 i vector
 	primtall.push_back(2);
 	primtall.push_back(3);
     for (int i=2; i<10000; i++)
@@ -26,6 +26,7 @@ int main ()
         } 
 	}
 	
+	// faktorerer tallet i start ved å iterere vector primtall
 	for(int i = 0; i < primtall.size(); i++)
 	{
 		while(tallet % primtall[i] == 0)
@@ -35,6 +36,7 @@ int main ()
 		}
 	}
 	
+	// gjennomgår lagrede faktorer og finner den største
 	int maxFaktor = 0;
 	cout << start << " = ";
 	for(int i = 0; i < faktorer.size(); i++)
@@ -42,12 +44,12 @@ int main ()
 		if(faktorer[i] > maxFaktor)
 			maxFaktor = faktorer[i];
 		
-		if(i == 0)
+		if(i == 0) // hvis første faktor, dropp " * " i print
 			cout << faktorer[i];
 		else
 			cout << " * " << faktorer[i];
 	}
 	
-	cout << "\n\nDen Største faktoren er: " << maxFaktor << endl;
+	cout << "\n\nDen Største faktoren er: " << maxFaktor << endl; // printer største primfaktor
 }
 
