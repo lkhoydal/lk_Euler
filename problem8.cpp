@@ -35,8 +35,7 @@ int main()
 		
 		if(tempProdukt > maksProdukt)
 			maksProdukt = tempProdukt;
-		
-		tempProdukt = 0; // resetter tempProdukt til ny iterasjon
+
 		i++;
 	}
 	
