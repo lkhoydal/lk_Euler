@@ -8,6 +8,7 @@ int main()
 	unsigned int tall = 2520;
 	
 	cout << "\nSjekker hvilket tall som er delbart på alle tall mellom- og inkludert 1 og 20" << endl;
+	
 	while(!erDelbar)
 	{
 		tall++;
