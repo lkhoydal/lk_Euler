@@ -1,9 +1,12 @@
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+	int start_s = clock();
+	
 	bool erDelbar = false;
 	unsigned int tall = 2520;
 	
@@ -25,4 +28,7 @@ int main()
 	}
 	
 	cout << "Tallet er: " << tall << endl;
+	
+	int stop_s = clock();
+	cout << "\nRuntime (ms): " << (stop_s - start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
 }
