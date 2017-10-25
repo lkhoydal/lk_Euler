@@ -4,7 +4,7 @@
 int main() 
 {
 	clock_t start_s = clock(); // starttidspunkt
-	
+	unsigned long antKalk = 0;
 	// i = c, j = b, k = a
 	// code
 	for(double i = 1000; i > 0; i--)
@@ -13,6 +13,7 @@ int main()
 		{
 			for(double k = 1; k <= 1000; k++)
 			{
+				antKalk++;
 				if((k < j) && (j < i))
 				{
 					if((k*k) + (j*j) == (i*i))
@@ -28,6 +29,7 @@ int main()
 			}
 		}
 	}
+	printf("\nAntall kombinasjoner gjennomført: %lu", antKalk);
 	
 	clock_t stop_s = clock(); // stoptidspunkt
 	
