@@ -26,5 +26,4 @@ int main()
 	clock_t stop_s = clock();
 	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC;
 	printf("\n\nRuntime (s): %f\n", tid);
-
 }
