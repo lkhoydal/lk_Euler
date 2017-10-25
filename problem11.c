@@ -2,17 +2,13 @@
 #include <math.h>
 #include <time.h>
 
-int main()
-{
-	// hvor mange i nummer i tillegg til inneværende skal summes produkt av
-	const int SIFFER = 3;
-	
-	int maksProdukt = 0; // største funnet produkt;
-	
-	clock_t start_s = clock();
-	
-	// initialiserer todimensjonal array for tallrekker
-	int rekke[21][21] = {
+// initialiserer global todimensjonal array for tallrekker
+
+int regnHorisontalt(int rekkeA, int rekkeB);
+int regnVertikalt(int rekkeA, int rekkeB);
+int regnDiagonalt(int rekkeA, int rekkeB);
+
+int rekke[21][21] = {
 		{},
 		{0,8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
 		{0,49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0},
@@ -35,80 +31,57 @@ int main()
 		{0,20,73,35,29,78,31,90,1,74,31,49,71,48,86,81,16,23,57,5,54},
 		{0,1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48},
 	};
+
+int main()
+{
+	// hvor mange i nummer i tillegg til inneværende skal summes produkt av
+	const int SIFFER = 3;
 	
+	int maksProdukt = 0; // største funnet produkt;
+	
+	clock_t start_s = clock(); // starter timer for runtime
+	
+	// Looper gjennom første dimensjon i array
 	for(int i = 1; i <= 20; i++)
 	{
+		// Looper gjennom andre dimensjon av array, med tallrekkene
 		for(int j = 1; j < (sizeof(rekke[i])/sizeof(int)); j++)
 		{
-			int tempProdukt = 0;
 			
-			// Om det er nok tall igjen mot høyre, regn sammen horinsontalt diag mot høyre
-			if((j + SIFFER) <= 20) // regner horisontalt mot høyre
-			{
-				// horisontal produkt-regning
-				for(int k = j; k <= j+SIFFER; k++)
-				{
-					if(tempProdukt == 0)
-						tempProdukt = rekke[i][k];
-					else
-						tempProdukt *= rekke[i][k];
-					
-					if(tempProdukt > maksProdukt) // om tempProdukt er større enn foreløpig maks, sett ny maks
-					{
-						maksProdukt = tempProdukt;
-						tempProdukt = 0;
-					}
-				} // end for horisontal regning
-				
-				// sjekker om det er plass nedover
-				if(20 >= i+(SIFFER+2))
-				{
-					int nesteRekke = i + 1;
-					// regner diag ned mot høyre
-					for(int k = j; k <= j+SIFFER; k++)
-					{
-						if(tempProdukt == 0)
-						tempProdukt = rekke[i][k];
-						else
-							tempProdukt *= rekke[nesteRekke][k];
-						nesteRekke++;
-						
-						if(tempProdukt > maksProdukt) // om tempProdukt er større enn foreløpig maks, sett ny maks
-						{
-							maksProdukt = tempProdukt;
-							tempProdukt = 0;
-						}
-					}
-				} // end i + siffer > 20
-				
-				
-			} // end if plass mot høyre
-			if(20 >= i+(SIFFER+1))
-			{
-				printf("\n\nVertitall: ");
-				// regner vertikalt
-				for(int k = 1; k <= 4; k++)
-				{
-					int rekkeNedenfor = i + k;
-					if(tempProdukt == 0)
-						tempProdukt = rekke[i][j];
-					else
-						tempProdukt *= rekke[rekkeNedenfor][j];
-					
-					if(tempProdukt > maksProdukt) // om tempProdukt er større enn foreløpig maks, sett ny maks
-					{
-						maksProdukt = tempProdukt;
-						tempProdukt = 0;
-					}
-					printf("%i ", rekke[rekkeNedenfor][j]);
-				}
-			}
-		} // end for sekundær rekke-loop
-	} // end for primær rekke-loop
+			// KODE for å avgjøre begrensninger i plassering i tallrekker
+			// for å sende posisjon til funksjoner for utregning
+			
+		} // end andre dimensjon for-loop
+	} // end første dimensjon for-loop
 	
 	printf("Maks produkt: %i\n", maksProdukt);
 	
-	clock_t stop_s = clock();
-	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC;
+	// 
+	clock_t stop_s = clock(); // stopper timer for runtime
+	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC; // regner runtime i sekunder
 	printf("\n\nRuntime (sec): %f\n", tid); // print runtime
+}
+
+
+// Funksjon for å motta plassering i primær og sekundærarray
+// og regne ut produkt horisontalt mot høyre
+int regnHorisontalt(int rekkeA, int rekkeB)
+{
+	
+}
+
+
+// Funksjon for å motta plassering i primær og sekundærarray
+// og regne ut produkt vertikalt nedover
+int regnVertikalt(int rekkeA, int rekkeB)
+{
+	
+}
+
+
+// Funksjon for å motta plassering i primær og sekundærarray
+// og regne ut diagonale produkter
+int regnDiagonalt(int rekkeA, int rekkeB)
+{
+	
 }
