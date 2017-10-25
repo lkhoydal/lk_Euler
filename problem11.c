@@ -2,12 +2,15 @@
 #include <math.h>
 #include <time.h>
 
-// initialiserer global todimensjonal array for tallrekker
+// hvor mange i nummer i tillegg til inneværende skal summes produkt av
+const int SIFFER = 3;
 
+// Prototyper funksjoner
 int regnHorisontalt(int rekkeA, int rekkeB);
 int regnVertikalt(int rekkeA, int rekkeB);
 int regnDiagonalt(int rekkeA, int rekkeB);
 
+// initialiserer global todimensjonal array for tallrekker
 int rekke[21][21] = {
 		{},
 		{0,8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
@@ -33,10 +36,7 @@ int rekke[21][21] = {
 	};
 
 int main()
-{
-	// hvor mange i nummer i tillegg til inneværende skal summes produkt av
-	const int SIFFER = 3;
-	
+{	
 	int maksProdukt = 0; // største funnet produkt;
 	
 	clock_t start_s = clock(); // starter timer for runtime
@@ -60,7 +60,7 @@ int main()
 	clock_t stop_s = clock(); // stopper timer for runtime
 	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC; // regner runtime i sekunder
 	printf("\n\nRuntime (sec): %f\n", tid); // print runtime
-}
+} // END MAIN
 
 
 // Funksjon for å motta plassering i primær og sekundærarray
