@@ -8,7 +8,8 @@ const int SIFFER = 3;
 // Prototyper funksjoner
 int regnHorisontalt(int rekkeA, int rekkeB);
 int regnVertikalt(int rekkeA, int rekkeB);
-int regnDiagonalt(int rekkeA, int rekkeB);
+int regnDiagonaltHoyre(int rekkeA, int rekkeB);
+int regnDiagonaltVenstre(int rekkeA, int rekkeB);
 
 // initialiserer global todimensjonal array for tallrekker
 int rekke[21][21] = {
@@ -36,52 +37,141 @@ int rekke[21][21] = {
 	};
 
 int main()
-{	
+{
 	int maksProdukt = 0; // største funnet produkt;
-	
+
 	clock_t start_s = clock(); // starter timer for runtime
-	
+
 	// Looper gjennom første dimensjon i array
 	for(int i = 1; i <= 20; i++)
 	{
+
 		// Looper gjennom andre dimensjon av array, med tallrekkene
 		for(int j = 1; j < (sizeof(rekke[i])/sizeof(int)); j++)
 		{
-			
+
+			regnVertikalt(i, j);
+			regnDiagonaltHoyre(i, j);
+			regnDiagonaltVenstre(i, j);
+			regnHorisontalt(i, j);
 			// KODE for å avgjøre begrensninger i plassering i tallrekker
 			// for å sende posisjon til funksjoner for utregning
-			
+
 		} // end andre dimensjon for-loop
 	} // end første dimensjon for-loop
-	
-	printf("Maks produkt: %i\n", maksProdukt);
-	
-	// 
+
+	// printf("Maks produkt: %i\n", maksProdukt);
+
 	clock_t stop_s = clock(); // stopper timer for runtime
 	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC; // regner runtime i sekunder
 	printf("\n\nRuntime (sec): %f\n", tid); // print runtime
 } // END MAIN
 
 
+/*
+#### FUNKSJONER ####
+*/
+
 // Funksjon for å motta plassering i primær og sekundærarray
 // og regne ut produkt horisontalt mot høyre
 int regnHorisontalt(int rekkeA, int rekkeB)
 {
-	
-}
+	int regnTilPosisjon = rekkeB + SIFFER;
+	int totalRegning = 0;
+
+	if(regnTilPosisjon <= 20)
+	{
+		printf("\n\nTallrekke horisontalt: "); // DEBUG
+		for(; rekkeB <= regnTilPosisjon; rekkeB++)
+		{
+			printf("%i ", rekke[rekkeA][rekkeB]); // DEBUG
+		}
+		return totalRegning;
+	}
+	else
+		return 0;
+} // END regnHorisontalt
 
 
 // Funksjon for å motta plassering i primær og sekundærarray
 // og regne ut produkt vertikalt nedover
 int regnVertikalt(int rekkeA, int rekkeB)
 {
-	
-}
+	int regnTilRekke = rekkeA + SIFFER;
+	int totalRegning = 0;
+
+	if(regnTilRekke <= 20)
+	{
+		printf("\n\nTallrekke vertikalt: "); // DEBUG
+		for(; rekkeA <= regnTilRekke; rekkeA++)
+		{
+			/*if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB];
+			else
+				totalRegning *= rekke[rekkeA][rekkeB];*/
+
+			printf("%i ", rekke[rekkeA][rekkeB]); // DEBUG
+		}
+		return totalRegning;
+	}
+	else
+		return 0;
+} // END regnVertikalt
 
 
 // Funksjon for å motta plassering i primær og sekundærarray
-// og regne ut diagonale produkter
-int regnDiagonalt(int rekkeA, int rekkeB)
+// og regne ut diagonale produkter ned til høyre
+int regnDiagonaltHoyre(int rekkeA, int rekkeB)
 {
-	
-}
+	int regnTilRekke = rekkeA + SIFFER;
+	int regnTilPosisjon = rekkeB + SIFFER;
+	int totalRegning = 0;
+
+	if((regnTilRekke <= 20) && (regnTilPosisjon <= 20))
+	{
+		int forskyvning = 0;
+		printf("\n\nTallrekke diagonalt høyre: "); // DEBUG
+		for(; rekkeA <= regnTilRekke; rekkeA++)
+		{
+			/*if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB];
+			else
+				totalRegning *= rekke[rekkeA][rekkeB + forskyvning];*/
+
+			printf("%i ", rekke[rekkeA][rekkeB + forskyvning]); // DEBUG
+			forskyvning++;
+		}
+		return totalRegning;
+	}
+	else
+		return 0;
+} // END regnDiagonaltHoyre
+
+
+// Funksjon for å motta plassering i primær og sekundærarray
+// og regne ut diagonale produkter ned til venstre
+int regnDiagonaltVenstre(int rekkeA, int rekkeB)
+{
+	int regnTilRekke = rekkeA + SIFFER;
+	int regnTilPosisjon = rekkeB - SIFFER;
+	int totalRegning = 0;
+
+	if((regnTilRekke <= 20) && (regnTilPosisjon >= 0))
+	{
+		int forskyvning = 0;
+		printf("\n\nTallrekke diagonalt venstre: "); // DEBUG
+		for(; rekkeA <= regnTilRekke; rekkeA++)
+		{
+			/*if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB];
+			else
+				totalRegning *= rekke[rekkeA][rekkeB + forskyvning];*/
+
+			printf("%i ", rekke[rekkeA][rekkeB - forskyvning]); // DEBUG
+			forskyvning++;
+		}
+		return totalRegning;
+	}
+	else
+		return 0;
+} // END regnDiagonaltHoyre
