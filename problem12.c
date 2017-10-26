@@ -3,7 +3,7 @@
 
 int main()
 {
-  unsigned long long triangelTall = 0;
+	unsigned long long triangelTall = 0;
 	int maksDeling = 0;
 
   clock_t start_s = clock();
@@ -15,10 +15,11 @@ int main()
   while(antallGangerDelt < 501)
   {
 		antallGangerDelt = 1;
-    triangelTall += i; // Legger på triangelTall
+    triangelTall += i; //Trekker fra triangelTall
 
     // Sjekker delbare tall for triangelTall
-		for(int j = 1; j <= ((triangelTall/2)+1); j++)
+		unsigned long triHalv = (triangelTall/2)+1;
+		for(int j = 1; j <= triHalv; j=j+2)
 		{
 			if(triangelTall % j == 0)
 			{
