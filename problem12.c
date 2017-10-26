@@ -14,11 +14,11 @@ int main()
 	int i = 1;
   while(antallGangerDelt < 501)
   {
-		antallGangerDelt = 0;
+		antallGangerDelt = 1;
     triangelTall += i; // Legger på triangelTall
 
     // Sjekker delbare tall for triangelTall
-		for(int j = triangelTall; j > 0; j--)
+		for(int j = 1; j <= ((triangelTall/2)+1); j++)
 		{
 			if(triangelTall % j == 0)
 			{
