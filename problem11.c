@@ -45,22 +45,22 @@ int main()
 	// Looper gjennom første dimensjon i array
 	for(int i = 1; i <= 20; i++)
 	{
-
 		// Looper gjennom andre dimensjon av array, med tallrekkene
 		for(int j = 1; j < (sizeof(rekke[i])/sizeof(int)); j++)
 		{
+			int tempRegn = 0;
+			if((tempRegn = regnVertikalt(i, j)) > maksProdukt)
+			 	maksProdukt = tempRegn;
+			if((tempRegn = regnHorisontalt(i, j)) > maksProdukt)
+			 	maksProdukt = tempRegn;
+			if((tempRegn = regnDiagonaltHoyre(i, j)) > maksProdukt)
+			 	maksProdukt = tempRegn;
+			if((tempRegn = regnDiagonaltVenstre(i, j)) > maksProdukt)
+			 	maksProdukt = tempRegn;
+		} // END andre dimensjon for-loop
+	} // END første dimensjon for-loop
 
-			regnVertikalt(i, j);
-			regnDiagonaltHoyre(i, j);
-			regnDiagonaltVenstre(i, j);
-			regnHorisontalt(i, j);
-			// KODE for å avgjøre begrensninger i plassering i tallrekker
-			// for å sende posisjon til funksjoner for utregning
-
-		} // end andre dimensjon for-loop
-	} // end første dimensjon for-loop
-
-	// printf("Maks produkt: %i\n", maksProdukt);
+	printf("Maks produkt: %i\n", maksProdukt);
 
 	clock_t stop_s = clock(); // stopper timer for runtime
 	double tid = (double)(stop_s - start_s)/CLOCKS_PER_SEC; // regner runtime i sekunder
@@ -81,10 +81,12 @@ int regnHorisontalt(int rekkeA, int rekkeB)
 
 	if(regnTilPosisjon <= 20)
 	{
-		printf("\n\nTallrekke horisontalt: "); // DEBUG
 		for(; rekkeB <= regnTilPosisjon; rekkeB++)
 		{
-			printf("%i ", rekke[rekkeA][rekkeB]); // DEBUG
+			if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB];
+			else
+				totalRegning *= rekke[rekkeA][rekkeB];
 		}
 		return totalRegning;
 	}
@@ -102,15 +104,12 @@ int regnVertikalt(int rekkeA, int rekkeB)
 
 	if(regnTilRekke <= 20)
 	{
-		printf("\n\nTallrekke vertikalt: "); // DEBUG
 		for(; rekkeA <= regnTilRekke; rekkeA++)
 		{
-			/*if(totalRegning == 0)
+			if(totalRegning == 0)
 				totalRegning = rekke[rekkeA][rekkeB];
 			else
-				totalRegning *= rekke[rekkeA][rekkeB];*/
-
-			printf("%i ", rekke[rekkeA][rekkeB]); // DEBUG
+				totalRegning *= rekke[rekkeA][rekkeB];
 		}
 		return totalRegning;
 	}
@@ -130,15 +129,12 @@ int regnDiagonaltHoyre(int rekkeA, int rekkeB)
 	if((regnTilRekke <= 20) && (regnTilPosisjon <= 20))
 	{
 		int forskyvning = 0;
-		printf("\n\nTallrekke diagonalt høyre: "); // DEBUG
 		for(; rekkeA <= regnTilRekke; rekkeA++)
 		{
-			/*if(totalRegning == 0)
-				totalRegning = rekke[rekkeA][rekkeB];
+			if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB + forskyvning];
 			else
-				totalRegning *= rekke[rekkeA][rekkeB + forskyvning];*/
-
-			printf("%i ", rekke[rekkeA][rekkeB + forskyvning]); // DEBUG
+				totalRegning *= rekke[rekkeA][rekkeB + forskyvning];
 			forskyvning++;
 		}
 		return totalRegning;
@@ -159,15 +155,12 @@ int regnDiagonaltVenstre(int rekkeA, int rekkeB)
 	if((regnTilRekke <= 20) && (regnTilPosisjon >= 0))
 	{
 		int forskyvning = 0;
-		printf("\n\nTallrekke diagonalt venstre: "); // DEBUG
 		for(; rekkeA <= regnTilRekke; rekkeA++)
 		{
-			/*if(totalRegning == 0)
-				totalRegning = rekke[rekkeA][rekkeB];
+			if(totalRegning == 0)
+				totalRegning = rekke[rekkeA][rekkeB - forskyvning];
 			else
-				totalRegning *= rekke[rekkeA][rekkeB + forskyvning];*/
-
-			printf("%i ", rekke[rekkeA][rekkeB - forskyvning]); // DEBUG
+				totalRegning *= rekke[rekkeA][rekkeB - forskyvning];
 			forskyvning++;
 		}
 		return totalRegning;
